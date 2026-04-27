@@ -1,50 +1,82 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+Version change: template -> 1.0.0
+Modified principles: all placeholders replaced with five project principles
+Added sections: Project Constraints; Development Workflow
+Removed sections: none
+Templates reviewed: ✅ .specify/templates/plan-template.md (no update needed)
+Templates reviewed: ✅ .specify/templates/spec-template.md (no update needed)
+Templates reviewed: ✅ .specify/templates/tasks-template.md (no update needed)
+Runtime docs reviewed: ✅ README.md (no update needed)
+Deferred items: none
+-->
+
+# Computer Graphics Course Project Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Readable Game Code
+All code MUST be easy for a classmate to follow without senior-level context.
+Prefer clear names, small functions, shallow nesting, and direct control flow.
+If a helper, abstraction, or pattern makes the code harder to read, do not use it.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Small Vertical Slices
+Build the game as small playable slices: movement, camera, textures, animation,
+collision, scoring, and UI. Every change MUST leave the project runnable and
+obviously improved. Large rewrites are discouraged unless they unblock a simpler
+design.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. OpenGL Resource Discipline
+Textures, models, animation data, and OpenGL state MUST have explicit ownership
+and cleanup. Prefer simple loaders and reusable helpers over hidden side effects.
+Resource lifetime bugs are treated as defects, not implementation details.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Build, Run, and Validate Locally
+The project MUST compile and run on the course machine using the documented local
+workflow. Every feature MUST have a quick validation path, even if that path is
+manual gameplay check. If the run or asset flow changes, update the project
+instructions in the same change.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Keep It Simple, Then Expand
+Choose the smallest design that proves the game idea. Do not add dependencies,
+architecture layers, or advanced rendering techniques unless they solve a real
+problem. The current goal is a clean, understandable 3D game, not an elaborate
+engine.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Project Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Target stack: C++ with OpenGL and GLUT, using local textures and basic
+	animation support suitable for a classroom project.
+- The game concept is intentionally flexible for now; features MUST support
+	discovery of the final idea instead of locking the project into a premature
+	design.
+- Code style MUST stay approachable: short modules, descriptive identifiers, and
+	minimal but useful comments where the logic is not obvious.
+- Asset names, paths, and animation clips MUST be documented clearly enough for a
+	teammate to follow the project without extra explanation.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- Start from the simplest playable prototype, then add one mechanic at a time.
+- Keep implementation changes small enough to review in one sitting.
+- Validate every visible change by building and running the project locally.
+- When a feature affects controls, camera, textures, or animation timing, verify
+	the behavior in the running game before moving on.
+- Update README.md when setup, run steps, or required assets change.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution takes precedence over informal habits, chat guidance, and any
+older project notes when they conflict.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Amendments require editing this file, updating any dependent templates or runtime
+docs that are affected, and recording the rationale in the Sync Impact Report.
+Versioning follows semantic rules: MAJOR for incompatible governance changes or
+principle redefinitions, MINOR for new principles or materially expanded policy,
+and PATCH for wording clarifications.
+
+All contributors MUST keep the code understandable, keep the project runnable,
+and avoid unnecessary complexity. Reviews SHOULD reject changes that are clever
+but harder to explain than the problem they solve.
+
+**Version**: 1.0.0 | **Ratified**: 2026-04-27 | **Last Amended**: 2026-04-27
