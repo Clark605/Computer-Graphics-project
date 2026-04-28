@@ -1,6 +1,6 @@
 # Snake 3D: A Classroom-Friendly OpenGL Game
 
-A simple, readable 3D Snake game implementation in C++ using OpenGL and GLUT. Designed for classroom instruction with clear code structure, progressive difficulty, and comprehensive validation.
+A simple, readable 3D Snake game implementation in C++ using OpenGL and GLUT. Designed for classroom instruction with clear code structure, fixed-speed gameplay, and comprehensive validation.
 
 ## Quick Start
 
@@ -43,13 +43,9 @@ The game executable (`main.exe`) will compile and launch automatically.
 - **GAME_OVER**: Hit a wall or yourself; press R to restart
 - **WIN**: Fill the entire board; press R to restart
 
-### Progressive Difficulty (US3)
-Speed increases at score milestones:
-- Score 0–4: 220ms per step
-- Score 5–9: 190ms per step
-- Score 10–14: 160ms per step
-- Score 15–19: 130ms per step
-- Score 20+: 100ms per step (capped)
+### Win Condition (US3)
+- Movement speed remains fixed at 220ms per step
+- Fill the board (no free cells remain) to trigger WIN state
 
 ## Project Structure
 
@@ -109,4 +105,4 @@ See `specs/001-snake-3d/quickstart.md` for:
 - **Manual validation checklist** (10 core scenarios)
 - **Phase 3 validation notes** (US1: Core gameplay)
 - **Phase 4 validation notes** (US2: State flow)
-- **Phase 5 validation notes** (US3: Progressive difficulty)
+- **Phase 5 validation notes** (US3: Win condition)

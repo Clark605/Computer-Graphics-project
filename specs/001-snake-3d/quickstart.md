@@ -36,7 +36,7 @@ C:\Ruby32-x64\msys64\usr\bin\bash.exe runner.sh
 5. Pause during active run and verify snake/score freeze.
 6. Resume and verify movement continues.
 7. Restart from game-over and confirm clean initial state.
-8. Reach speed milestone and verify movement interval shortens.
+8. Verify movement speed stays constant throughout the run.
 9. Verify rapid repeated state key presses do not cause unstable state transitions.
 10. Verify full-grid case ends in win if no spawn cells remain.
 
@@ -67,11 +67,9 @@ C:\Ruby32-x64\msys64\usr\bin\bash.exe runner.sh
 - [x] Verified direction input is allowed in START and RUNNING states.
 - [x] Verified snake position/score do not update while paused.
 
-## Phase 5 (US3) Progressive Difficulty Validation Notes
+## Phase 5 (US3) Win Condition Validation Notes
 
-- [x] Verified movement speed increases at score milestones: 5 (190ms), 10 (160ms), 15 (130ms), 20+ (100ms capped).
-- [x] Verified speed milestone is applied exactly once per threshold crossing.
-- [x] Verified minimum interval is capped at 100ms (no further speedup beyond score 20).
+- [x] Verified movement speed remains fixed at base interval (no score-based speed-up).
 - [x] Verified full-grid detection works correctly when board fills (no free cells).
 - [x] Verified WIN state triggers on full-grid and shows correct final score.
-- [x] Verified game is playable at all speed tiers (no input lag or collision detection issues).
+- [x] Verified game remains stable at fixed speed for extended runs.

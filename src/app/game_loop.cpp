@@ -19,7 +19,6 @@ GameLoop::GameLoop(Arena& arena, Snake& snake, Food& food, Controls& controls, R
       state_(GameState::START),
       stateBeforePause_(GameState::RUNNING),
       score_(0),
-      speedTier_(0),
       stepIntervalMs_(GameConfig::kBaseStepMs),
       lastStepAtMs_(0),
       lastPauseToggleAtMs_(-1000),
@@ -29,7 +28,6 @@ void GameLoop::initialize() {
     state_ = GameState::START;
     stateBeforePause_ = GameState::RUNNING;
     score_ = 0;
-    speedTier_ = 0;
     stepIntervalMs_ = GameConfig::kBaseStepMs;
     lastStepAtMs_ = 0;
     lastPauseToggleAtMs_ = -1000;
@@ -119,23 +117,6 @@ void GameLoop::stepRunningState() {
     if (snake_.head() == food_.position()) {
         snake_.growByOne();
         ++score_;
-
-        // Check if we've crossed a speed milestone
-        // Milestones: score 5 → 190ms, score 10 → 160ms, score 15 → 130ms, score 20 → 100ms
-        int newSpeedTier = 0;
-        if (score_ >= 20) newSpeedTier = 4;
-        else if (score_ >= 15) newSpeedTier = 3;
-        else if (score_ >= 10) newSpeedTier = 2;
-        else if (score_ >= 5) newSpeedTier = 1;
-
-        if (newSpeedTier > speedTier_) {
-            speedTier_ = newSpeedTier;
-            // Apply interval reduction: base 220ms - (speedTier * 30ms), capped at 100ms
-            stepIntervalMs_ = GameConfig::kBaseStepMs - (speedTier_ * 30);
-            if (stepIntervalMs_ < 100) {
-                stepIntervalMs_ = 100;
-            }
-        }
 
         placeFood();
     }

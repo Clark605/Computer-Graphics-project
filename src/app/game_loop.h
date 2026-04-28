@@ -68,7 +68,6 @@ private:
     GameState state_;
     GameState stateBeforePause_;  // Track state to restore after unpause
     int score_;
-    int speedTier_;
     int stepIntervalMs_;
     int lastStepAtMs_;
     int lastPauseToggleAtMs_;     // Debounce rapid pause inputs
