@@ -119,13 +119,34 @@ void GameLoop::stepRunningState() {
     if (snake_.head() == food_.position()) {
         snake_.growByOne();
         ++score_;
+
+        // Check if we've crossed a speed milestone
+        // Milestones: score 5 → 190ms, score 10 → 160ms, score 15 → 130ms, score 20 → 100ms
+        int newSpeedTier = 0;
+        if (score_ >= 20) newSpeedTier = 4;
+        else if (score_ >= 15) newSpeedTier = 3;
+        else if (score_ >= 10) newSpeedTier = 2;
+        else if (score_ >= 5) newSpeedTier = 1;
+
+        if (newSpeedTier > speedTier_) {
+            speedTier_ = newSpeedTier;
+            // Apply interval reduction: base 220ms - (speedTier * 30ms), capped at 100ms
+            stepIntervalMs_ = GameConfig::kBaseStepMs - (speedTier_ * 30);
+            if (stepIntervalMs_ < 100) {
+                stepIntervalMs_ = 100;
+            }
+        }
+
         placeFood();
     }
 }
 
 void GameLoop::placeFood() {
     std::vector<GridPos> freeCells = arena_.collectFreeCells(snake_.segments());
-    if (!food_.placeFromFreeCells(freeCells, score_ + static_cast<int>(snake_.segments().size()))) {
+    int seed = glutGet(GLUT_ELAPSED_TIME);
+    seed ^= (score_ * 1103515245 + 12345);
+    seed ^= (static_cast<int>(snake_.segments().size()) << 16);
+    if (!food_.placeFromFreeCells(freeCells, seed)) {
         // No free cells left: board is full, player has won!
         state_ = GameState::WIN;
     }

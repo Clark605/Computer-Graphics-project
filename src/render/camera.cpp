@@ -2,6 +2,8 @@
 
 #include <gl/glut.h>
 
+#include "app/game_loop.h"
+
 namespace snake3d {
 
 Camera::Camera() = default;
@@ -17,7 +19,17 @@ void Camera::applyProjection(int width, int height) const {
 void Camera::applyView() const {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(10.0, 22.0, 28.0, 10.0, 0.0, 10.0, 0.0, 1.0, 0.0);
+    const float sizeX = static_cast<float>(GameConfig::kArenaWidth);
+    const float sizeZ = static_cast<float>(GameConfig::kArenaHeight);
+    const float centerX = sizeX * 0.5f;
+    const float centerZ = sizeZ * 0.5f;
+
+    // Center the camera on the board and move closer for a tighter view.
+    const float eyeX = centerX;
+    const float eyeY = sizeX * 1.4f;
+    const float eyeZ = sizeZ * 1.6f;
+
+    gluLookAt(eyeX, eyeY, eyeZ, centerX, 0.0f, centerZ, 0.0f, 1.0f, 0.0f);
 }
 
 }  // namespace snake3d

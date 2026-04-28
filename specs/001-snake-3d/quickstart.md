@@ -42,27 +42,36 @@ C:\Ruby32-x64\msys64\usr\bin\bash.exe runner.sh
 
 ## Phase 3 (US1) Validation Notes
 
-- [ ] Verified one-cell-per-step movement in all directions.
-- [ ] Verified reverse-direction input is ignored.
-- [ ] Verified food consumption increases score and adds one tail segment.
-- [ ] Verified food spawn always lands on a free cell.
-- [ ] Verified wall collision triggers game-over.
-- [ ] Verified self-collision triggers game-over.
-- [ ] Verified game-over overlay shows final score.
+- [x] Verified one-cell-per-step movement in all directions.
+- [x] Verified reverse-direction input is ignored.
+- [x] Verified food consumption increases score and adds one tail segment.
+- [x] Verified food spawn always lands on a free cell.
+- [x] Verified wall collision triggers game-over.
+- [x] Verified self-collision triggers game-over.
+- [x] Verified game-over overlay shows final score.
 
 ## Phase 4 (US2) State Flow Validation Notes
 
-- [ ] Verified START state shows "Press Arrow Key to Start" message.
-- [ ] Verified first arrow key input transitions START → RUNNING.
-- [ ] Verified P key pauses game while RUNNING; snake/score freeze.
-- [ ] Verified P key resumes game from PAUSED back to RUNNING.
-- [ ] Verified R key restarts from GAME_OVER state back to START.
-- [ ] Verified R key restarts from WIN state back to START.
-- [ ] Verified R key does not restart while game is RUNNING.
-- [ ] Verified rapid P key presses (< 100ms apart) are debounced to single toggle.
-- [ ] Verified rapid R key presses (< 100ms apart) are debounced to single restart.
-- [ ] Verified full-grid condition (no free cells) triggers WIN state.
-- [ ] Verified WIN overlay shows "You Won! Board Full (R to Restart)" with final score.
-- [ ] Verified direction input is blocked while in PAUSED, GAME_OVER, and WIN states.
-- [ ] Verified direction input is allowed in START and RUNNING states.
-- [ ] Verified snake position/score do not update while paused.
+- [x] Verified START state shows "Press Arrow Key to Start" message.
+- [x] Verified first arrow key input transitions START → RUNNING.
+- [x] Verified P key pauses game while RUNNING; snake/score freeze.
+- [x] Verified P key resumes game from PAUSED back to RUNNING.
+- [x] Verified R key restarts from GAME_OVER state back to START.
+- [x] Verified R key restarts from WIN state back to START.
+- [x] Verified R key does not restart while game is RUNNING.
+- [x] Verified rapid P key presses (< 100ms apart) are debounced to single toggle.
+- [x] Verified rapid R key presses (< 100ms apart) are debounced to single restart.
+- [x] Verified full-grid condition (no free cells) triggers WIN state.
+- [x] Verified WIN overlay shows "You Won! Board Full (R to Restart)" with final score.
+- [x] Verified direction input is blocked while in PAUSED, GAME_OVER, and WIN states.
+- [x] Verified direction input is allowed in START and RUNNING states.
+- [x] Verified snake position/score do not update while paused.
+
+## Phase 5 (US3) Progressive Difficulty Validation Notes
+
+- [x] Verified movement speed increases at score milestones: 5 (190ms), 10 (160ms), 15 (130ms), 20+ (100ms capped).
+- [x] Verified speed milestone is applied exactly once per threshold crossing.
+- [x] Verified minimum interval is capped at 100ms (no further speedup beyond score 20).
+- [x] Verified full-grid detection works correctly when board fills (no free cells).
+- [x] Verified WIN state triggers on full-grid and shows correct final score.
+- [x] Verified game is playable at all speed tiers (no input lag or collision detection issues).

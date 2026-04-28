@@ -71,13 +71,13 @@
 
 ### Implementation for User Story 2
 
-- [ ] T020 [P] [US2] Implement state transitions (`START`, `RUNNING`, `PAUSED`, `GAME_OVER`, `WIN`) in `src/app/game_loop.cpp`
-- [ ] T021 [P] [US2] Implement pause toggle handling in `src/input/controls.cpp` and `src/app/game_loop.cpp`
-- [ ] T022 [US2] Enforce paused invariants (no position/score updates) in `src/app/game_loop.cpp`
-- [ ] T023 [US2] Implement restart-from-non-active-state reset flow in `src/app/game_loop.cpp`
-- [ ] T024 [US2] Debounce/limit repeated state inputs to one transition per update step in `src/input/controls.cpp`
-- [ ] T025 [US2] Render paused/start state overlays in `src/render/renderer.cpp`
-- [ ] T026 [US2] Add manual validation notes for state-flow scenarios in `specs/001-snake-3d/quickstart.md`
+- [x] T020 [P] [US2] Implement state transitions (`START`, `RUNNING`, `PAUSED`, `GAME_OVER`, `WIN`) in `src/app/game_loop.cpp`
+- [x] T021 [P] [US2] Implement pause toggle handling in `src/input/controls.cpp` and `src/app/game_loop.cpp`
+- [x] T022 [US2] Enforce paused invariants (no position/score updates) in `src/app/game_loop.cpp`
+- [x] T023 [US2] Implement restart-from-non-active-state reset flow in `src/app/game_loop.cpp`
+- [x] T024 [US2] Debounce/limit repeated state inputs to one transition per update step in `src/input/controls.cpp`
+- [x] T025 [US2] Render paused/start state overlays in `src/render/renderer.cpp`
+- [x] T026 [US2] Add manual validation notes for state-flow scenarios in `specs/001-snake-3d/quickstart.md`
 
 **Checkpoint**: US1 and US2 both work independently with stable state behavior
 
@@ -91,11 +91,11 @@
 
 ### Implementation for User Story 3
 
-- [ ] T027 [P] [US3] Implement speed milestone table and capped interval reduction in `src/app/game_loop.cpp`
-- [ ] T028 [US3] Apply updated step interval at milestone boundaries in `src/app/game_loop.cpp`
-- [ ] T029 [US3] Implement full-grid detection (`no free cells`) with transition to `WIN` in `src/app/game_loop.cpp` and `src/gameplay/food.cpp`
-- [ ] T030 [US3] Render win-state overlay and final score in `src/render/renderer.cpp`
-- [ ] T031 [US3] Add manual validation notes for speed and win scenarios in `specs/001-snake-3d/quickstart.md`
+- [x] T027 [P] [US3] Implement speed milestone table and capped interval reduction in `src/app/game_loop.cpp`
+- [x] T028 [US3] Apply updated step interval at milestone boundaries in `src/app/game_loop.cpp`
+- [x] T029 [US3] Implement full-grid detection (`no free cells`) with transition to `WIN` in `src/app/game_loop.cpp` and `src/gameplay/food.cpp`
+- [x] T030 [US3] Render win-state overlay and final score in `src/render/renderer.cpp`
+- [x] T031 [US3] Add manual validation notes for speed and win scenarios in `specs/001-snake-3d/quickstart.md`
 
 **Checkpoint**: All user stories complete and independently verifiable
 
@@ -105,10 +105,10 @@
 
 **Purpose**: Improve readability, visuals, and final project delivery quality
 
-- [ ] T032 [P] Add simple board/snake/food textures and binding lifecycle notes in `src/render/renderer.cpp` and `README.md`
-- [ ] T033 Refactor oversized functions for readability and keep beginner-friendly naming in `src/app/game_loop.cpp` and `src/render/renderer.cpp`
-- [ ] T034 Verify build/run instructions and controls are accurate in `README.md`
-- [ ] T035 Execute full manual validation pass from `specs/001-snake-3d/quickstart.md` and record outcomes in `specs/001-snake-3d/quickstart.md`
+- [x] T032 [P] Add simple board/snake/food textures and binding lifecycle notes in `src/render/renderer.cpp` and `README.md`
+- [x] T033 Refactor oversized functions for readability and keep beginner-friendly naming in `src/app/game_loop.cpp` and `src/render/renderer.cpp`
+- [x] T034 Verify build/run instructions and controls are accurate in `README.md`
+- [x] T035 Execute full manual validation pass from `specs/001-snake-3d/quickstart.md` and record outcomes in `specs/001-snake-3d/quickstart.md`
 
 ---
 

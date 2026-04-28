@@ -29,10 +29,10 @@ struct GridPos {
 };
 
 struct GameConfig {
-    static constexpr int kArenaWidth = 20;
-    static constexpr int kArenaHeight = 20;
-    static constexpr int kWindowWidth = 900;
-    static constexpr int kWindowHeight = 700;
+    static constexpr int kArenaWidth = 12;
+    static constexpr int kArenaHeight = 12;
+    static constexpr int kWindowWidth = 600;
+    static constexpr int kWindowHeight = 400;
     static constexpr int kBaseStepMs = 220;
 };
 
