@@ -14,6 +14,6 @@ g++.exe -w -g -std=c++17 -I./src -c src/render/camera.cpp -o camera.o
 
 g++.exe -w -g -std=c++17 -I./src -c src/render/renderer.cpp -o renderer.o
 
-g++.exe -o main.exe main.o game_loop.o arena.o snake.o food.o controls.o camera.o renderer.o -lfreeglut -lopengl32 -lglu32
+g++.exe -o main.exe main.o game_loop.o arena.o snake.o food.o controls.o camera.o renderer.o -lfreeglut -lopengl32 -lglu32 -lole32 -lwindowscodecs -luuid
 
 ./main.exe
