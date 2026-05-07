@@ -417,63 +417,11 @@ unsigned int Renderer::snakeTextureForSegment(size_t index) const {
         return 0;
     }
 
-    const std::vector<GridPos>& segments = snake_->segments();
-    if (segments.empty()) {
+    if (snake_->segments().empty()) {
         return 0;
     }
-
-    auto textureAt = [this](SnakeTextureSlot slot) {
-        return snakeTextureIDs_[static_cast<size_t>(slot)];
-    };
-
-    if (index == 0) {
-        switch (snake_->direction()) {
-            case Direction::UP: return textureAt(SnakeTextureSlot::HEAD_UP);
-            case Direction::RIGHT: return textureAt(SnakeTextureSlot::HEAD_RIGHT);
-            case Direction::DOWN: return textureAt(SnakeTextureSlot::HEAD_DOWN);
-            case Direction::LEFT: return textureAt(SnakeTextureSlot::HEAD_LEFT);
-        }
-    }
-
-    if (index + 1 == segments.size()) {
-        Direction tailDirection = directionBetween(segments[index - 1], segments[index]);
-        switch (tailDirection) {
-            case Direction::UP: return textureAt(SnakeTextureSlot::TAIL_UP);
-            case Direction::RIGHT: return textureAt(SnakeTextureSlot::TAIL_RIGHT);
-            case Direction::DOWN: return textureAt(SnakeTextureSlot::TAIL_DOWN);
-            case Direction::LEFT: return textureAt(SnakeTextureSlot::TAIL_LEFT);
-        }
-    }
-
-    Direction fromPrev = directionBetween(segments[index - 1], segments[index]);
-    Direction toNext = directionBetween(segments[index], segments[index + 1]);
-
-    const bool vertical = (fromPrev == Direction::UP || fromPrev == Direction::DOWN) &&
-                          (toNext == Direction::UP || toNext == Direction::DOWN);
-    if (vertical) {
-        return textureAt(SnakeTextureSlot::BODY_VERTICAL);
-    }
-
-    const bool horizontal = (fromPrev == Direction::LEFT || fromPrev == Direction::RIGHT) &&
-                            (toNext == Direction::LEFT || toNext == Direction::RIGHT);
-    if (horizontal) {
-        return textureAt(SnakeTextureSlot::BODY_HORIZONTAL);
-    }
-
-    if ((fromPrev == Direction::LEFT && toNext == Direction::UP) ||
-        (fromPrev == Direction::DOWN && toNext == Direction::RIGHT)) {
-        return textureAt(SnakeTextureSlot::BODY_TOP_LEFT);
-    }
-    if ((fromPrev == Direction::UP && toNext == Direction::RIGHT) ||
-        (fromPrev == Direction::LEFT && toNext == Direction::DOWN)) {
-        return textureAt(SnakeTextureSlot::BODY_TOP_RIGHT);
-    }
-    if ((fromPrev == Direction::RIGHT && toNext == Direction::DOWN) ||
-        (fromPrev == Direction::UP && toNext == Direction::LEFT)) {
-        return textureAt(SnakeTextureSlot::BODY_BOTTOM_RIGHT);
-    }
-
-    return textureAt(SnakeTextureSlot::BODY_BOTTOM_LEFT);
+    SnakeTextureSlot slot = snakeTextureSlotForSegment(index);
+    return snakeTextureIDs_[static_cast<size_t>(slot)];
 }
 
 Renderer::SnakeTextureSlot Renderer::snakeTextureSlotForSegment(size_t index) const {

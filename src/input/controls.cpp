@@ -4,6 +4,16 @@
 
 namespace snake3d {
 
+namespace {
+
+bool consumeFlag(bool& flag) {
+    bool value = flag;
+    flag = false;
+    return value;
+}
+
+}  // namespace
+
 Controls::Controls() {
     reset();
 }
@@ -55,15 +65,11 @@ bool Controls::consumePendingDirection(Direction& outDirection) {
 }
 
 bool Controls::consumePauseToggleRequested() {
-    bool value = pauseToggleRequested_;
-    pauseToggleRequested_ = false;
-    return value;
+    return consumeFlag(pauseToggleRequested_);
 }
 
 bool Controls::consumeRestartRequested() {
-    bool value = restartRequested_;
-    restartRequested_ = false;
-    return value;
+    return consumeFlag(restartRequested_);
 }
 
 }  // namespace snake3d

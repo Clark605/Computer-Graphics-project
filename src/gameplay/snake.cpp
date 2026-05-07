@@ -41,16 +41,13 @@ void Snake::applyQueuedDirection() {
 void Snake::stepForward() {
     GridPos newHead = nextHeadFor(direction_);
 
-    GridPos oldTail = segments_.back();
-    for (int i = static_cast<int>(segments_.size()) - 1; i > 0; --i) {
-        segments_[i] = segments_[i - 1];
-    }
-    segments_[0] = newHead;
-
+    segments_.insert(segments_.begin(), newHead);
     if (growOnNextStep_) {
-        segments_.push_back(oldTail);
         growOnNextStep_ = false;
+        return;
     }
+
+    segments_.pop_back();
 }
 
 void Snake::growByOne() {
