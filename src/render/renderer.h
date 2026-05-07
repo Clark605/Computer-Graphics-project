@@ -23,6 +23,7 @@ public:
 private:
     void drawBackdrop() const;
     void drawSurroundings() const;
+    void drawTrees() const;
     void drawPitWalls() const;
     void drawBoard() const;
     void drawSnake() const;

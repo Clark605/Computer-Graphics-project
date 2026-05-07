@@ -51,6 +51,13 @@ struct ComScope {
     }
 };
 
+struct TreePlacement {
+    float x;
+    float z;
+    float scale;
+    int variant;
+};
+
 std::wstring widenPath(const char* path) {
     return std::wstring(path, path + std::strlen(path));
 }
@@ -128,6 +135,49 @@ GLuint loadPngTexture(const char* path, GLenum wrapS, GLenum wrapT) {
     return textureID;
 }
 
+void drawTreeModel(float x, float z, float scale, int variant) {
+    const float trunkColors[][3] = {
+        {0.36f, 0.24f, 0.12f},
+        {0.40f, 0.26f, 0.14f},
+        {0.33f, 0.22f, 0.11f}
+    };
+
+    const float leafColors[][3] = {
+        {0.12f, 0.38f, 0.14f},
+        {0.14f, 0.43f, 0.16f},
+        {0.16f, 0.35f, 0.10f}
+    };
+
+    const int paletteIndex = variant % 3;
+
+    glPushMatrix();
+    glTranslatef(x, 0.0f, z);
+    glScalef(scale, scale, scale);
+
+    glColor3f(trunkColors[paletteIndex][0], trunkColors[paletteIndex][1], trunkColors[paletteIndex][2]);
+    glPushMatrix();
+    glTranslatef(0.0f, 0.28f, 0.0f);
+    glScalef(0.22f, 0.56f, 0.22f);
+    glutSolidCube(1.0f);
+    glPopMatrix();
+
+    glColor3f(leafColors[paletteIndex][0], leafColors[paletteIndex][1], leafColors[paletteIndex][2]);
+    glPushMatrix();
+    glTranslatef(0.0f, 0.95f, 0.0f);
+    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+    glutSolidCone(0.78f, 1.15f, 6, 2);
+    glPopMatrix();
+
+    glColor3f(leafColors[paletteIndex][0] * 0.88f, leafColors[paletteIndex][1] * 0.88f, leafColors[paletteIndex][2] * 0.88f);
+    glPushMatrix();
+    glTranslatef(0.0f, 1.48f, 0.0f);
+    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+    glutSolidCone(0.54f, 0.88f, 6, 2);
+    glPopMatrix();
+
+    glPopMatrix();
+}
+
 }  // namespace
 
 Renderer::Renderer()
@@ -188,6 +238,7 @@ void Renderer::drawFrame() const {
 
     drawBackdrop();
     drawSurroundings();
+    drawTrees();
     drawPitWalls();
     drawBoard();
     drawFood();
@@ -282,6 +333,29 @@ void Renderer::drawSurroundings() const {
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
+}
+
+void Renderer::drawTrees() const {
+    if (!arena_) {
+        return;
+    }
+
+    const float boardWidth = static_cast<float>(arena_->width());
+    const float boardHeight = static_cast<float>(arena_->height());
+
+    const TreePlacement placements[] = {
+        {-3.0f, -2.0f, 0.95f, 0},
+        {boardWidth + 2.3f, -1.4f, 1.05f, 1},
+        {-2.7f, boardHeight + 2.5f, 0.90f, 2},
+        {boardWidth + 2.0f, boardHeight + 2.2f, 1.10f, 0},
+        {boardWidth * 0.18f, -3.0f, 0.82f, 1},
+        {boardWidth * 0.82f, boardHeight + 3.0f, 0.88f, 2},
+    };
+
+    glDisable(GL_TEXTURE_2D);
+    for (const TreePlacement& placement : placements) {
+        drawTreeModel(placement.x, placement.z, placement.scale, placement.variant);
+    }
 }
 
 void Renderer::drawPitWalls() const {
